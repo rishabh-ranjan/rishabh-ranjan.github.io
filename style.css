@@ -1,0 +1,17 @@
+body {
+	color: #444;
+	font: 18px Georgia, serif;
+	line-height: 1.6;
+	margin: 40px auto;
+	max-width: 800px;
+	padding: 0 10px;
+}
+
+h1, h2, h3 {
+	font-family: Verdana, sans-serif;
+}
+
+
+li {
+	margin: 10px 0;
+}
