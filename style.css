@@ -1,17 +1,18 @@
 body {
 	color: #444;
-	font: 18px Georgia, serif;
-	line-height: 1.6;
-	margin: 40px auto;
-	max-width: 800px;
-	padding: 0 10px;
+	font-family: Arial, sans-serif;
+	line-height: 1.2;
+	max-width: 720px;
+	margin: auto;
+	padding: 16px;
 }
 
-h1, h2, h3 {
-	font-family: Verdana, sans-serif;
+h1 {
+	font-family: Baskerville, serif;
+	font-weight: normal;
 }
 
 
 li {
-	margin: 10px 0;
+	margin: 16px 0;
 }
