@@ -9,7 +9,9 @@ body {
 }
 
 h1 {
-	font-family: Baskerville, serif;
+	/* font-family: Arial, sans-serif; */
+	/* font-family: Baskerville, serif; */
+	font-family: Georgia, serif;
 	font-weight: normal;
 }
 
