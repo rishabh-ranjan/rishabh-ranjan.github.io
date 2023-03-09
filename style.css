@@ -1,10 +1,11 @@
 body {
 	color: #444;
 	font-family: Arial, sans-serif;
+	font-size: 1rem;
 	line-height: 1.2;
 	max-width: 720px;
 	margin: auto;
-	padding: 16px;
+	padding: 1rem;
 }
 
 h1 {
@@ -12,7 +13,10 @@ h1 {
 	font-weight: normal;
 }
 
+#title {
+	font-size: 3rem;
+}
 
 li {
-	margin: 16px 0;
+	margin: 1rem 0;
 }
