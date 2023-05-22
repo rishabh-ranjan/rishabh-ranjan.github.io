@@ -40,14 +40,15 @@ h1, h2 {
 	font-family: "Libre Baskerville", Georgia, serif;
 	/* font-family: Georgia, serif; */
 	font-weight: normal;
+	color: #000;
 }
 
 h1 {
-	font-size: 2.7rem;
+	font-size: 2.5rem;
 }
 
 h2 {
-	font-size: 1.8rem;
+	font-size: 1.75rem;
 }
 
 li {
@@ -55,7 +56,7 @@ li {
 }
 
 a {
-	font-weight: bold;
+	/* font-weight: bold; */
 	text-decoration: none;
 }
 
@@ -65,7 +66,7 @@ a:active, a:focus, a:hover {
 
 u {
     text-decoration: none;
-    border-bottom: 2px solid #444;
+    border-bottom: 2px solid black;
 }
 
 b {
