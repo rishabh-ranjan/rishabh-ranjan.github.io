@@ -1,5 +1,5 @@
 body {
-	background-image: url("bg.jpg");
+	background-image: url("images/bg.jpg");
 	background-size: cover;
 	/* background-size: 100vw auto; */
 	background-position: center center;
@@ -49,4 +49,13 @@ h2 {
 
 li {
 	margin: 1rem 0;
+}
+
+a {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:active, a:focus, a:hover {
+	border-bottom: solid;
 }
