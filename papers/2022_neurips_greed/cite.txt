@@ -1,0 +1,6 @@
+@inproceedings{ranjan2022greed,
+  title={GREED: A Neural Framework for Learning Graph Distance Functions},
+  author={Ranjan, Rishabh and Grover, Siddharth and Medya, Sourav and Chakaravarthy, Venkatesan and Sabharwal, Yogish and Ranu, Sayan},
+  booktitle={Advances in Neural Information Processing Systems},
+  year={2022}
+}
