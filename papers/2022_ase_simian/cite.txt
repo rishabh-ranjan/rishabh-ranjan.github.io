@@ -1,0 +1,7 @@
+@inproceedings{ranjan2022exploiting,
+  title={Exploiting Epochs and Symmetries in Analysing MPI Programs},
+  author={Ranjan, Rishabh and Agrawal, Ishita and Sharma, Subodh},
+  booktitle={37th IEEE/ACM International Conference on Automated Software Engineering},
+  pages={1--12},
+  year={2022}
+}
