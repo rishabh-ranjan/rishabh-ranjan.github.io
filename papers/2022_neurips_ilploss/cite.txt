@@ -1,0 +1,6 @@
+@article{nandwani2022solver,
+  title={A Solver-Free Framework for Scalable Learning in Neural ILP Architectures},
+  author={Nandwani, Yatin and Ranjan, Rishabh and Singla, Parag and others},
+  journal={arXiv preprint arXiv:2210.09082},
+  year={2022}
+}
