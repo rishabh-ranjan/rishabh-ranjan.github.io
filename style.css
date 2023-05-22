@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
 body {
 	background-image: url("images/bg.jpg");
 	background-size: cover;
@@ -7,10 +9,10 @@ body {
 	background-attachment: fixed;
 	/* background-repeat: no-repeat; */
 	/* background-position: center auto; */
-	/* color: #444; */
-	font-family: Arial, sans-serif;
+	color: #444;
+	font-family: "Open Sans", serif;
 	font-size: 1rem;
-	line-height: 1.2;
+	line-height: 1.5;
 	max-width: 720px;
 	margin: auto;
 	padding: 0.75rem;
@@ -31,11 +33,12 @@ body {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.98);
 }
 
 h1, h2 {
-	font-family: Georgia, serif;
+	font-family: "Libre Baskerville", Georgia, serif;
+	/* font-family: Georgia, serif; */
 	font-weight: normal;
 }
 
@@ -59,3 +62,13 @@ a {
 a:active, a:focus, a:hover {
 	border-bottom: solid;
 }
+
+u {
+    text-decoration: none;
+    border-bottom: 2px solid #444;
+}
+
+b {
+	font-weight: 600;
+}
+
