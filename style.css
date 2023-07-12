@@ -11,24 +11,30 @@ body {
 
 #profile_pic {
 	float: right;
-	width: 155px;
+	width: 140px;
 }
 
 h1, h2 {
-	font-family: "Palatino", serif;
+	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Cambria, Georgia, serif;
 	font-weight: normal;
 }
 
 h1 {
 	font-size: 3rem;
+	margin-top: 2.5rem;
+	margin-bottom: 1rem;
 }
 
 h2 {
 	font-size: 2rem;
+	margin-top: 3rem;
+	margin-bottom: 0.5rem;
 }
 
 th {
 	padding: 0 1rem;
+	text-align: right;
+	font-weight: 600;
 }
 
 li {
@@ -44,8 +50,8 @@ a:active, a:focus, a:hover {
 }
 
 u {
-    text-decoration: none;
-    border-bottom: 1px solid black;
+	text-decoration: none;
+	border-bottom: 1px solid black;
 }
 
 b {
