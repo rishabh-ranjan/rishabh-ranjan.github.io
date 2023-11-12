@@ -1,4 +1,4 @@
-# Rishabh Ranjan's personal website
+# rishabh ranjan's personal website
 
 Feel free to use this template for your own website!
 
