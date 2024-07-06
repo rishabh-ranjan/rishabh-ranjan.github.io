@@ -1,0 +1,5 @@
+@inproceedings{feyposition,
+  title={Position: Relational Deep Learning-Graph Representation Learning on Relational Databases},
+  author={Fey, Matthias and Hu, Weihua and Huang, Kexin and Lenssen, Jan Eric and Ranjan, Rishabh and Robinson, Joshua and Ying, Rex and You, Jiaxuan and Leskovec, Jure},
+  booktitle={Forty-first International Conference on Machine Learning}
+}
