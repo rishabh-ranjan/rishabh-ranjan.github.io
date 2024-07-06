@@ -1,0 +1,6 @@
+@article{ranjan2024post,
+  title={Post-Hoc Reversal: Are We Selecting Models Prematurely?},
+  author={Ranjan, Rishabh and Garg, Saurabh and Raman, Mrigank and Guestrin, Carlos and Lipton, Zachary Chase},
+  journal={arXiv preprint arXiv:2404.07815},
+  year={2024}
+}
