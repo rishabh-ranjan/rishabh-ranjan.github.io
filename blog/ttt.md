@@ -1,35 +1,30 @@
-# approximating attention heads with test time training
+# approximate attention with test time training
 
-At the heart of the transformer architecture
-is the attention head computation, which,
-given key, value matrix $K, V \in \R^{T \times d}$
-(or key-value cache)
-and query vector $q \in \R^d$,
-returns the attention-score weighted sum of the values.
+The attention operator is at the heart of the transformer architecture.
+It takes as input
+1. a query vector $q \in \mathbb{R}^d$, and,
+2. a set of key-value vector pair $\\{\dots, (k_i, v_i), \dots\\}$,
+$k_i, v_i \in \mathbb{R}^d$ (also called the KV-cache),
 
+and returns a similarity weighted sum of values:
 $$
-h(q, K, V) = \sum softmax(q^T k) v
+a(q, \\{\dots, (k_i, v_i), \dots\\}) = \sum_i \langle q, k_i \rangle v_i \quad (1)
 $$
-
-This operation takes \(O(T^2d)\) time.
-Can we approximate it in time linear in \(T\)?
-
-Let's break it down:
+where the similarity function is
 $$
-a = q^T k  # attention score
-\alpha = \exp(q^T k) / \sum \exp(q^T k)  # attention weight
-h = \sum \alpha v  # output
+\langle q, k_i \rangle = \frac{\exp(q^\top k_i / \sqrt{d})}{\sum_j \exp(q^\top k_j / \sqrt{d})}
 $$
+for the most common variant, Scaled Dot Product Attention (SDPA).
 
-This is similar to a non-parameteric classifier or kernel method.
+The time complexity of SDPA is $O(Td)$ for T tokens
+(one $(k, v)$ pair per token),
+which leads to the $O(T^2d)$ term in the transformer's complexity
+(there is a $q$ for every token).
 
-What if we replace it with a parameteric classifier.
+Suppose we wanted to approximate SDPA in $O(d)$ time.
+We could train a neural network $f_\theta \colon \mathbb{R}^d \to \mathbb{R}^d$ with
+$\\{\dots, (k_i, v_i), \dots\\}$ as the training set.
+Then evaluating $f_\theta(q)$ would be a replacement for Eqn. 1 (Why?).
 
-Let's say I train a neural network $f_\theta(x)$
-on the training set $\{(k_1, v_1), (k_2, v_2), ..., (k_t, v_t)\}$.
-Then I can approximate the head with
-$$
-h = f_\theta(q)
-$$.
 
-That's it. Read the paper for more.
+
