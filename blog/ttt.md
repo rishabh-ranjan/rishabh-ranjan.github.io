@@ -1,42 +1,35 @@
 # test-time training as a drop-in replacement for causal self-attention
 
-Test-time training (TTT) layer is a recent alternative
-to the causal attention layer with linear complexity.
+Test-time training (TTT) [1] is a recent approach to sequence modeling
+which scales linearly with the sequence length.
+[1] presents the TTT layer with both
+outer-loop parameters, learnt at train-time,
+and inner-loop parameters, learnt at test-time.
 In this blog post,
-I try to motivate TTT as a drop-in replacement for causal attention.
-This differs slightly from the presentation adopted in the original paper,
-hence the post.
-In particular,
-this blog presents the TTT layer as having no outer loop parameters.
-One immediate consequence is that causal attention in a pre-trained
-transformer-based LLM can be swapped out with a TTT layer,
-to achieve linear complexity,
-without too much performance regression.
-To me this is one of the coolest parts of the TTT model,
-but I feel it does not come across as clearly in the original paper.
-
-
-First, I will motivate TTT as a replacement for single-query attention,
-then show how it removes the quadratic dependence on the sequence length $T$
-by considering causal attention.
-
+I give an alternate formulation of the TTT layer
+without outer-loop parameters.
+In particular, I show that the TTT computation
+is compatible with the parameter-free attention operator.
+This suggests that TTT models can be initialized
+with pre-trained transformer weights,
+which is not particularly highlighted in the paper.
+Further, I believe that some will find this presentation
+of TTT easier to digest.
 
 ## single-query attention
 
-Single-query attention has the following type signature:
+Single-query attention has the type signature $o = a(q, K, V)$, where,
+* $q \in \mathbb{R}^{d_k}$ is the query vector,
+* $K = [k_1, \dots, k_T]$, $k_i \in \mathbb{R}^{d_k}$ is the list of key vectors,
+* $V = [v_1, \dots, v_T]$, $v_i \in \mathbb{R}^{d_v}$ is the list of value vectors, and,
+* $o \in \mathbb{R}^{d_v}$ is the output vector.
 
-__Inputs:__
-1. single query vector, $q \in \mathbb{R}^{d_k}$
-2. list of key vectors, $K = [k_1, \dots, k_T]$, $k_i \in \mathbb{R}^{d_k}$
-3. list of value vectors, $V = [v_1, \dots, v_T]$, $v_i \in \mathbb{R}^{d_v}$
 
-__Output:__ single output $o \in \mathbb{R}^{d_v}$.
-
-The standard scaled-dot-product-attention (SDPA) is computed as follows:
+The standard scaled-dot-product-attention ($a^{\text{SDPA}}$) is computed as follows:
 
 1. $w_i = \dfrac{\exp\left(q^\top k_i\right)}{\sum_j \exp\left(q^\top k_j\right)}$
 
-2. $o^{\text{SDPA}} = \sum_i w_i v_i$
+2. $o = \sum_i w_i v_i$
 
 (We ignore the $\sqrt{d_k}$ denominator added for numerical stability.)
 
@@ -46,8 +39,8 @@ An intuitive breakdown of the two steps is:
 
 
 This is reminiscent of the nearest-neighbor classifier with
-$\\{(k_1, v_1), \dots, (k_T, v_T)\\}$ as the train set
-and $q$ as the test input.
+train set $\\{(k_1, v_1), \dots, (k_T, v_T)\\}$
+and test input $q$.
 
 But, if we are training classifiers, why not train a neural network?
 The two steps would look like this:
@@ -56,8 +49,8 @@ The two steps would look like this:
 
 This motivates $a^{TTT}$ as a replacement for $a^{SDPA}$,
 computed as follows:
-1. $\theta = \arg \min_\theta \sum_i (f_\theta(k_i) - v_i)^2$
-2. $o^{TTT} = f_\theta(q)$, where,
+1. $\theta = \arg \min_\theta \sum_i \Vert f_\theta(k_i) - v_i \Vert^2$
+2. $o = f_\theta(q)$, where,
 
 
 
@@ -65,47 +58,60 @@ computed as follows:
 
 To see how TTT removes the quadratic dependence on sequence length $T$,
 we must consider the entire causal self-attention computation.
-It has the following type signature:
+It has the type signature $O = A(Q, K, V)$, where,
+* $Q = [q_1, \dots, q_T]$, $q_i \in \mathbb{R}^{d_k}$ is the list of query vectors,
+* $K = [k_1, \dots, k_T]$, $k_i \in \mathbb{R}^{d_k}$ is the list of key vectors,
+* $V = [v_1, \dots, v_T]$, $v_i \in \mathbb{R}^{d_v}$ is the list of value vectors, and,
+* $O = [o_1, \dots, o_T]$, $o_i \in \mathbb{R}^{d_v}$ is the list of output vectors.
 
-__Inputs:__
-1. _list of_ query vectors, $Q = [q_1, \dots, q_T]$, $q_i \in \mathbb{R}^{d_k}$
-2. list of key vectors, $K = [k_1, \dots, k_T]$, $k_i \in \mathbb{R}^{d_k}$
-3. list of value vectors, $V = [v_1, \dots, v_T]$, $v_i \in \mathbb{R}^{d_v}$
 
-__Output:__ _list of_ output vectors, $O = [o_1, \dots, o_T]$, $o_i \in \mathbb{R}^{d_v}$
+This is related to single-query attention by:
+$o_t = a(q_t, [k_1, \dots, k_t], [v_1, \dots, v_t])$
 
-XXX: start here. o as function looks weird
-Standard SDPA attention is given by:
-$$o_t = o^{SDPA}(q_t, [k_1, \dots, k_t], [v_1, \dots, v_t])$$
+This is causal because $o_t$ depends on $(k_i, v_i)$ only for $i \le t$.
 
-Note that to compute $a_t$ only $(k_i, v_i)$ for $i \le t$ is used,
-which corresponds to causal attention.
+For $A^{\text{SDPA}}$, each $o_t$ is linear in the sequence length,
+so the entire computation is quadratic in the sequence length.
+No amortization is possible.
 
-For $a^{SDPA}$ no amortization is possible,
-so the computation of $A(Q, K, V)$ is $O(T^2)$,
-since the computation of $a(q_t, K[:t], V[:t])$ is $O(t)$.
+$A^{\text{TTT}}$ escapes this quadratic dependence
+by only updating the learnt parameter vector from the previous timestep,
+instead of training a fresh one from scratch.
 
-For $A^{TTT}$, we have a parameter vector $\theta_t$ for every time step.
-$$o_t = f_{\theta_t}(q_t)$$, where,
-$$\theta_t = \arg \min_\theta \sum_{i=1}^t (f_\theta(k_i) - v_i)^2 $$
+For example, if we use one step of gradient descent
+on the training point $(k_t, v_t)$ with learning rate $\eta$,
+the entire $A^{\text{TTT}}$ computation can be achieved as below,
+which is linear in the sequence length $T$:
 
-For $A_{TTT}$, the cost of training the neural network can be amortized over
-the various values of $t$.
-Intuitively, for every new token,
-the neural network only needs to be updated on the training point
-corresponding to its KV-pair.
-For example, we can do one step of gradient descent:
+For $t=1, \dots, T$:
+1. $\theta_t = \theta_{t-1} - \eta \nabla_\theta (f_\theta(k_t) - v_t)^2 \big\|_{\theta_t}$
+2. $o_t = f_\theta(q_t)$
 
-$$\theta_t = \theta_{t-1} - \eta g_t(\theta_t)$$, where,
 
-$$g_t(\theta) = \nabla_\theta (f_\theta(k_t) - v_t)^2$$ is the gradient,
+## how the original paper presents it
 
-and $\eta$ is the learning rate for $\theta_t$.
+Recall that in a transformer attention head,
+$(q_t, k_t, v_t)$'s are obtained as projections from
+the token vector $x_t$:
+$q_t = W^Q x_t, k_t = W^K x_t, v_t = W^V x_t$.
 
-This keep the overall dependence on the size of the KV-cache only linear.
+The original paper includes these as "outer-loop" parameters
+of the TTT layer. Then their inner-loop loss function
+
+While their notation is suggestive,
+the connection to query, key and value in attention
+is not explicitly highlighted.
+This obscures the possibility of reusing pre-trained
+transformer weights in TTT-layer-based models.
+
 
 
 ## epilogue
+
+This exposition is in contrast to the one used in the original
+paper which treats $\theta_Q$, $\theta_K$, $\theta_V$ as "outer-loop"
+parameters of the TTT layer,
+and proposes
 
 Of course, this simple explanation says nothing about
 making the idea actually work,
@@ -114,6 +120,9 @@ sub-quadratic attention variants out there.
 The original paper is profound in its motivations,
 philosophy and techninal achievements.
 Go read it!
+
+If you are curious, my presentation offers an alternative to their
+sections 2.3 and 2.4, where they include 
 
 
 
