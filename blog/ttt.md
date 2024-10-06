@@ -104,7 +104,7 @@ This blog post has nothing to say about
 making the idea work in practice,
 or why it should do any better than all the other
 sub-quadratic sequence models out there.
-I believe that
+In my opinion,
 __the original paper is profound in its philosophy and technical achievements.__
 I highly recommend giving it a thorough read,
 if you haven't already!
