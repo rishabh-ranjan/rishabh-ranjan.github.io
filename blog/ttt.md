@@ -25,27 +25,26 @@ the full causal self-attention operator.
 ## single-query attention
 
 Single-query attention has the type signature $o = a(q, K, V)$, where,
-* $q \in \mathbb{R}^{d_k}$ is the query vector,
-* $K = [k_1, \dots, k_T]$, $k_i \in \mathbb{R}^{d_k}$ is the list of key vectors,
-* $V = [v_1, \dots, v_T]$, $v_i \in \mathbb{R}^{d_v}$ is the list of value vectors, and,
-* $o \in \mathbb{R}^{d_v}$ is the output vector.
+* $q \in \mathbb{R}^{d_k}$ is the _query_ vector,
+* $K = [k_1, \dots, k_T]$, $k_i \in \mathbb{R}^{d_k}$ is the list of _key_ vectors,
+* $V = [v_1, \dots, v_T]$, $v_i \in \mathbb{R}^{d_v}$ is the list of _value_ vectors, and,
+* $o \in \mathbb{R}^{d_v}$ is the _output_ vector.
 
 
-The standard scaled-dot-product-attention ($a^{\text{SDPA}}$) is computed as follows:
+The standard _scaled-dot-product-attention_ ($a^{\text{SDPA}}$) is computed as follows:
 1. $w = \text{softmax}\left(\left\\{\frac{q \cdot k_1}{\sqrt{d_k}}, \dots, \frac{q \cdot k_T}{\sqrt{d_k}}\right\\}\right)$
 2. $o = \sum_{i=1}^t w_i v_i$
 
 Below is an intuitive breakdown of the two steps:
-1. Soft-select a key $k_i$ most similar to the query $q$.
+1. Soft-select a key $k_i$ most _similar_ to the query $q$.
 2. Return the associated value $v_i$.
 
 
-This is similar to applying a nearest-neighbor classifier with
+This is reminiscent of applying a _nearest-neighbor classifier_ with
 train set $\\{(k_1, v_1), \dots, (k_T, v_T)\\}$, and
 test input $q$.
-
-So long as we have a classifier on the key-value pairs,
-why not use a neural network?
+__So long as we have a classifier on the key-value pairs,
+why not use a neural network?__
 This would look like below:
 1. Train a neural network $f_\theta$ to predict $v_i$ given input $k_i$, and,
 2. Return the prediction of the network on $q$.
@@ -66,7 +65,7 @@ is invoked inside the over-arching self-attention computation.
 
 ## causal self-attention
 
-In self-attention, there is a query vector,
+In _self-attention_, there is a query vector,
 and an associated output vector,
 for each key-value pair.
 The type signature is $O = A(Q, K, V)$, where,
@@ -78,7 +77,7 @@ The type signature is $O = A(Q, K, V)$, where,
 
 The relation to single-query attention is given by:
 $o_t = a(q_t, [k_1, \dots, k_t], [v_1, \dots, v_t])$
-The dependence of $o_t$ on $(k_i, v_i)$ only for $i \le t$ makes it _causal_.
+The dependence of $o_t$ on $(k_i, v_i)$ only for $i \le t$ makes this kind of self-attention _causal_.
 
 $A^{\text{SDPA}}$ is quadratic in the sequence length,
 as each $o_t$ is linear in $t$,
@@ -99,14 +98,15 @@ This is linear in the sequence length $T$.
 
 ## epilogue
 
-While I try to present the core idea behind TTT,
-this blog post has nothing to say about
+What I have presented is only one way to
+gain an introductory understanding of TTT.
+This blog post has nothing to say about
 making the idea work in practice,
 or why it should do any better than all the other
-sub-quadratic attention variants out there.
-The original paper is profound in its motivations,
-philosophy and technical achievements.
-I would recommend giving it a thorough read,
+sub-quadratic sequence models out there.
+I believe that
+__the original paper is profound in its philosophy and technical achievements.__
+I highly recommend giving it a thorough read,
 if you haven't already!
 Sections 2.1-2.3 are most directly comparable
 and they are excellent reads despite this post.
@@ -116,7 +116,7 @@ and they are excellent reads despite this post.
 ## acknowledgements
 
 This post was inspired by discussions with Krish Parikh and Marcel Roed,
-and indirectly from Yu Sun's talks on the topic.
+and indirectly from Yu Sun's many talks on the topic.
 
 ## references
 
