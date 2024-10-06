@@ -1,4 +1,4 @@
-# test-time training as a drop-in replacement for causal attention
+# test-time training as a drop-in replacement for causal self-attention
 
 Test-time training (TTT) layer is a recent alternative
 to the causal attention layer with linear complexity.
@@ -17,7 +17,7 @@ but I feel it does not come across as clearly in the original paper.
 
 
 First, I will motivate TTT as a replacement for single-query attention,
-then show how it removes the quadratic dependence on the sequence length
+then show how it removes the quadratic dependence on the sequence length $T$
 by considering causal attention.
 
 
@@ -26,17 +26,17 @@ by considering causal attention.
 Single-query attention has the following type signature:
 
 __Inputs:__
-1. query, $q \in \mathbb{R}^{d_k}$
-2. keys, $K = [k_1, \dots, k_T]$, $k_i \in \mathbb{R}^{d_k}$
-3. values, $V = [v_1, \dots, v_T]$, $v_i \in \mathbb{R}^{d_v}$
+1. single query vector, $q \in \mathbb{R}^{d_k}$
+2. list of key vectors, $K = [k_1, \dots, k_T]$, $k_i \in \mathbb{R}^{d_k}$
+3. list of value vectors, $V = [v_1, \dots, v_T]$, $v_i \in \mathbb{R}^{d_v}$
 
-__Output:__ $a(q, K, V) \in \mathbb{R}^{d_v}$.
+__Output:__ single output $o \in \mathbb{R}^{d_v}$.
 
 The standard scaled-dot-product-attention (SDPA) is computed as follows:
 
 1. $w_i = \dfrac{\exp\left(q^\top k_i\right)}{\sum_j \exp\left(q^\top k_j\right)}$
 
-2. $a^{\text{SDPA}} = \sum_i w_i v_i$
+2. $o^{\text{SDPA}} = \sum_i w_i v_i$
 
 (We ignore the $\sqrt{d_k}$ denominator added for numerical stability.)
 
@@ -57,29 +57,26 @@ The two steps would look like this:
 This motivates $a^{TTT}$ as a replacement for $a^{SDPA}$,
 computed as follows:
 1. $\theta = \arg \min_\theta \sum_i (f_\theta(k_i) - v_i)^2$
-2. $a^{TTT} = f_\theta(q)$, where,
+2. $o^{TTT} = f_\theta(q)$, where,
 
 
 
-## causal attention
+## causal self-attention
 
-$a_{TTT}$ in the previous section does not exactly remove the dependence
-on the size of the KV-cache, because it still requires training the neural network,
-which is atleast linear in the KV-cache if training on all KV pairs.
-
-However, in practice, it is possible to amortize this cost.
-To see this, we must step back and consider the entire causal attention computation.
+To see how TTT removes the quadratic dependence on sequence length $T$,
+we must consider the entire causal self-attention computation.
 It has the following type signature:
 
-Inputs:
-1. list of queries, $Q = [q_1, \dots, q_T]$, $q_i \in \mathbb{R}^{d_k}$
-2. list of keys, $K = [k_1, \dots, k_T]$, $k_i \in \mathbb{R}^{d_k}$
-3. list of values, $V = [v_1, \dots, v_T]$, $v_i \in \mathbb{R}^{d_v}$
+__Inputs:__
+1. _list of_ query vectors, $Q = [q_1, \dots, q_T]$, $q_i \in \mathbb{R}^{d_k}$
+2. list of key vectors, $K = [k_1, \dots, k_T]$, $k_i \in \mathbb{R}^{d_k}$
+3. list of value vectors, $V = [v_1, \dots, v_T]$, $v_i \in \mathbb{R}^{d_v}$
 
-Output: list of output vectors, $A(Q, K, V) = [o_1, \dots, o_T]$, $o_i \in \mathbb{R}^{d_v}$
+__Output:__ _list of_ output vectors, $O = [o_1, \dots, o_T]$, $o_i \in \mathbb{R}^{d_v}$
 
+XXX: start here. o as function looks weird
 Standard SDPA attention is given by:
-$$a_t = a^{SDPA}(q_t, [k_1, \dots, k_t], [v_1, \dots, v_t])$$
+$$o_t = o^{SDPA}(q_t, [k_1, \dots, k_t], [v_1, \dots, v_t])$$
 
 Note that to compute $a_t$ only $(k_i, v_i)$ for $i \le t$ is used,
 which corresponds to causal attention.
