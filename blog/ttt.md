@@ -118,6 +118,4 @@ and they are excellent reads despite this post.
 This post was inspired by discussions with Krish Parikh and Marcel Roed,
 and indirectly from Yu Sun's many talks on the topic.
 
-## references
-
 [^ttt]: Learning to (Learn at Test Time): RNNs with Expressive Hidden States, <https://arxiv.org/abs/2407.04620>
