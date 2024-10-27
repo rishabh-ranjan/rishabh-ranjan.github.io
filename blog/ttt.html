@@ -19,7 +19,8 @@ MathJax.Hub.Config({
 
 <h1>test-time training as a drop-in replacement for causal self-attention</h1>
 
-<i>Test-time training (TTT)</i>[^ttt] is a recent approach to sequence modeling
+<a href="https://arxiv.org/abs/2407.04620"><i>Test-time training (TTT)</i></a>
+is a recent approach to sequence modeling
 which scales linearly with the sequence length.
 Sun et. al.[^ttt] present the TTT layer with both
 <i>outer-loop parameters</i>, learnt at train-time,
@@ -77,14 +78,16 @@ This would look like below:
 </ol>
 
 
-This motivates\( a^{\text{TTT}}$, computed as follows:
-1.\( \theta = \arg \min_\theta \sum_{i=1}^T \Vert f_\theta(k_i) - v_i \Vert^2$
-2.\( o = f_\theta(q)$.
+This motivates \( a^{\text{TTT}} \), computed as follows:
+<ol>
+<li>\( \theta = \arg \min_\theta \sum_{i=1}^T \Vert f_\theta(k_i) - v_i \Vert^2 \)</li>
+<li>\( o = f_\theta(q) \). </li>
+</ol>
 
 Step 1 corresponds to training the network with an\( L_2 \)loss.
 If we have to train on all key-value pairs,
-then\( a^{\text{TTT}} \)is at least linear in the sequence length,
-no better than\( a^{\text{SDPA}}$.
+then \( a^{\text{TTT}} \) is at least linear in the sequence length,
+no better than \( a^{\text{SDPA}} \).
 To see how TTT can be more efficient,
 we need to consider how single-query attention
 is invoked inside the over-arching self-attention computation.
@@ -95,32 +98,36 @@ is invoked inside the over-arching self-attention computation.
 In <i>self-attention</i>, there is a query vector,
 and an associated output vector,
 for each key-value pair.
-The type signature is\( O = A(Q, K, V)$, where,
-*\( Q = [q_1, \dots, q_T]$,\( q_i \in \mathbb{R}^{d_k} \)is the _list of_ query vectors,
-*\( K = [k_1, \dots, k_T]$,\( k_i \in \mathbb{R}^{d_k} \)is the list of key vectors,
-*\( V = [v_1, \dots, v_T]$,\( v_i \in \mathbb{R}^{d_v} \)is the list of value vectors, and,
-*\( O = [o_1, \dots, o_T]$,\( o_i \in \mathbb{R}^{d_v} \)is the _list of_ output vectors.
+The type signature is\( O = A(Q, K, V)\), where,
+<ul>
+<li>\( Q = [q_1, \dots, q_T]\),\( q_i \in \mathbb{R}^{d_k} \)is the _list of_ query vectors,</li>
+<li>\( K = [k_1, \dots, k_T]\),\( k_i \in \mathbb{R}^{d_k} \)is the list of key vectors,</li>
+<li>\( V = [v_1, \dots, v_T]\),\( v_i \in \mathbb{R}^{d_v} \)is the list of value vectors, and,</li>
+<li>\( O = [o_1, \dots, o_T]\),\( o_i \in \mathbb{R}^{d_v} \)is the _list of_ output vectors.</li>
+</ul>
 
 
 The relation to single-query attention is given by:
-$o_t = a(q_t, [k_1, \dots, k_t], [v_1, \dots, v_t])$
+\(o_t = a(q_t, [k_1, \dots, k_t], [v_1, \dots, v_t])\)
 The dependence of\( o_t \)on\( (k_i, v_i) \)only for\( i \le t \)makes this kind of self-attention <i>causal</i>.
 
-$A^{\text{SDPA}} \)is quadratic in the sequence length,
-as each\( o_t \)is linear in\( t$,
+\(A^{\text{SDPA}} \)is quadratic in the sequence length,
+as each\( o_t \)is linear in\( t\),
 and no further optimization is possible.
-$A^{\text{TTT}} \)escapes this quadratic dependence
+\(A^{\text{TTT}} \)escapes this quadratic dependence
 by reusing the learnt neural network from the previous timestep,
 instead of training a fresh one from scratch.
 For example, if we use one step of gradient descent
-on every pair\( (k_t, v_t) \)with learning rate\( \eta$,
-$A^{\text{TTT}} \)can be computed as below:
+on every pair\( (k_t, v_t) \)with learning rate\( \eta\),
+\(A^{\text{TTT}} \)can be computed as below:
 
-For\( t=1, \dots, T$:
-1.\( \theta_t = \theta_{t-1} - \eta \nabla_{\theta_t} \Vert f_{\theta_t}(k_t) - v_t \Vert^2$
-2.\( o_t = f_\theta(q_t)$
+For\( t=1, \dots, T\):
+<ol>
+<li>\( \theta_t = \theta_{t-1} - \eta \nabla_{\theta_t} \Vert f_{\theta_t}(k_t) - v_t \Vert^2\)</li>
+<li>\( o_t = f_\theta(q_t)\)</li>
+</ol>
 
-This is linear in the sequence length\( T$.
+This is linear in the sequence length\( T\).
 
 
 <h2>epilogue</h2>
