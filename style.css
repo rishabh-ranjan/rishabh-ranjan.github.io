@@ -50,6 +50,7 @@ li {
 a {
 	color: green;
 	text-decoration: none;
+	border-bottom: solid 1px;
 }
 
 a:active, a:focus, a:hover {
