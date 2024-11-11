@@ -31,64 +31,21 @@ The recent paper
 <a href="https://arxiv.org/abs/2407.04620">
 "Learning to (Learn at Test Time): RNNs with Expressive Hidden States"
 </a>
-presents an exciting new approach to sequence modeling,
-called <i>test-time training (TTT)</i>.
-It scales linearly with the sequence length,
-while achieving performance competitive with transformers.
-The original paper presents TTT models as "RNNs with expressive hidden states".
-In this blog post,
-I motivate TTT models from the other direction,
-as "transformers without quadratic attention".
-Another difference from the original paper is that
-in my formulation, the TTT layer does not have any outer-loop parameters,
-and so can be a drop-in replacement for the attention module.
-One consequence of this perspective is that
-TTT models can be initialized with pre-trained transformer weights,
-which I find to be me one of the cooler aspects of the idea.
-
-
-
-
-<p>
-<i>Test-time training (TTT)</i>,
-as described in the paper
-<a href="https://arxiv.org/abs/2407.04620">
-"Learning to (Learn at Test Time): RNNs with Expressive Hidden States"
-</a>,
-is an exciting new approach to sequence modeling.
-In this blog post,
-I motivate TTT as an approximation to the attention mechanism.
-This is easier to explain in the case of a single query vector,
-
-First, I have
+presents <i>test-time training (TTT)</i>,
+an exciting new approach to sequence modeling.
+TTT employs a <i>recurrent neural network (RNN)</i> -style architecture
 which scales linearly with the sequence length.
-The paper presents the <i>TTT layer</i> with both
-<i>outer-loop parameters</i>, learnt at train-time,
-and <i>inner-loop parameters</i>, learnt at test-time.
+However, unlike traditional RNNs,
+TTT models achieve transformer-level quality.
 In this blog post,
-I give an alternate formulation of the TTT layer
-without outer-loop parameters.
-Under this formulation,
-TTT can be thought of as an approximation to the attention mechanism.
-This suggests that TTT models can be initialized
-with pre-trained transformer weights,
-which is not particularly highlighted in the paper.
-I hope that this post adds to the reader's intuitions
-about TTT.
-</p>
+I present an alternate formulation of TTT
+as an approximation to the attention mechanism,
+which lies at the heart of the transformer architecture.
+Apart from providing fresh intuition for TTT,
+this perspective suggests interesting possibilities
+such as initializing TTT models with pre-trained transformer weights.
 
-<p>
-First, I motivate TTT as a substitute for
-an attention call involving a single query vector.
-However, this does not immediately lead to linear complexity.
-To see that, I consider causal self-attention,
-(RR: causally masked self-attention?)
-comprising multiple attention calls,
-one for each token in the sequence.
-The efficiency of TTT arises from reusing the inner-loop parameters
-across these multiple calls.
-(RR: inner-loop doesn't make sense at this point)
-</p>
+<h2>short intro to TTT</h2>
 
 <h2>approximating attention with test-time training</h2>
 
