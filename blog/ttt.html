@@ -6,7 +6,7 @@
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../style.css">
-<title>test-time training as a drop-in replacement for causal self-attention</title>
+<title>test-time training as a drop-in replacement for causally masked self-attention</title>
 
 </head>
 
@@ -23,34 +23,82 @@ MathJax.Hub.Config({
 </h3>
 <br>
 
-<h1>test-time training as a drop-in replacement for causal self-attention</h1>
-<h3>November 2024</h3>
+<h1>learning to (learn at test time): transformers without quadratic attention</h1>
+<h3>November 10, 2024</h3>
 <br>
 
-<a href="https://arxiv.org/abs/2407.04620"><i>Test-time training (TTT)</i></a>
-is a recent approach to sequence modeling
+<i>Test-time training (TTT)</i> is an exciting new approach to sequence modeling,
+
+The recent paper
+<a href="https://arxiv.org/abs/2407.04620">
+"Learning to (Learn at Test Time): RNNs with Expressive Hidden States"
+</a>
+presents an exciting new approach to sequence modeling,
+named <i>test-time training (TTT)</i>.
+
+<p>
+<a href="https://arxiv.org/abs/2407.04620">
+<i>Test-time training (TTT)</i>
+</a>
+is an exciting new approach to sequence modeling.
+It scales linearly with the sequence length,
+while achieving performance competitive with transformers.
+The original paper presents TTT as an "RNN with expressive hidden states".
+In this blog post,
+I motivate TTT from the other direction,
+as an "attention with efficient scaling".
+Another difference from the original paper is that
+in my formulation, the TTT layer does not have any outer-loop parameters,
+and so can be a drop-in replacement for the attention module.
+One consequence of this perspective is that
+TTT models can be initialized with pre-trained transformer weights,
+which I find to be me one of the cooler aspects of the idea.
+
+
+
+
+<p>
+<i>Test-time training (TTT)</i>,
+as described in the paper
+<a href="https://arxiv.org/abs/2407.04620">
+"Learning to (Learn at Test Time): RNNs with Expressive Hidden States"
+</a>,
+is an exciting new approach to sequence modeling.
+In this blog post,
+I motivate TTT as an approximation to the attention mechanism.
+This is easier to explain in the case of a single query vector,
+
+First, I have
 which scales linearly with the sequence length.
-Sun et. al.[^ttt] present the TTT layer with both
+The paper presents the <i>TTT layer</i> with both
 <i>outer-loop parameters</i>, learnt at train-time,
 and <i>inner-loop parameters</i>, learnt at test-time.
 In this blog post,
-I give an alternate formulation
+I give an alternate formulation of the TTT layer
 without outer-loop parameters.
-In particular, I show that the TTT computation
-is compatible with the parameter-free attention operator.
+Under this formulation,
+TTT can be thought of as an approximation to the attention mechanism.
 This suggests that TTT models can be initialized
 with pre-trained transformer weights,
 which is not particularly highlighted in the paper.
-Further, some might find this presentation
-easier to digest than the original.
+I hope that this post adds to the reader's intuitions
+about TTT.
+</p>
 
+<p>
 First, I motivate TTT as a substitute for
-attention with a single query vector.
-Then, I show how TTT achieves linear complexity
-in the sequence length by considering
-the full causal self-attention operator.
+an attention call involving a single query vector.
+However, this does not immediately lead to linear complexity.
+To see that, I consider causal self-attention,
+(RR: causally masked self-attention?)
+comprising multiple attention calls,
+one for each token in the sequence.
+The efficiency of TTT arises from reusing the inner-loop parameters
+across these multiple calls.
+(RR: inner-loop doesn't make sense at this point)
+</p>
 
-<h2>single-query attention</h2>
+<h2>approximating attention with test-time training</h2>
 
 Single-query attention has the type signature \( o = a(q, K, V) \), where,
 <ul>
@@ -101,7 +149,7 @@ we need to consider how single-query attention
 is invoked inside the over-arching self-attention computation.
 
 
-<h2>causal self-attention</h2>
+<h2>how does TTT achieve linear scaling?</h2>
 
 In <i>self-attention</i>, there is a query vector,
 and an associated output vector,
@@ -137,6 +185,7 @@ For\( t=1, \dots, T\):
 
 This is linear in the sequence length\( T\).
 
+<h2>consequences and comparison with the original paper</h2>
 
 <h2>epilogue</h2>
 
