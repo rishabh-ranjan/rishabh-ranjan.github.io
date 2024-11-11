@@ -27,26 +27,18 @@ MathJax.Hub.Config({
 <h3>November 10, 2024</h3>
 <br>
 
-<i>Test-time training (TTT)</i> is an exciting new approach to sequence modeling,
-
 The recent paper
 <a href="https://arxiv.org/abs/2407.04620">
 "Learning to (Learn at Test Time): RNNs with Expressive Hidden States"
 </a>
 presents an exciting new approach to sequence modeling,
-named <i>test-time training (TTT)</i>.
-
-<p>
-<a href="https://arxiv.org/abs/2407.04620">
-<i>Test-time training (TTT)</i>
-</a>
-is an exciting new approach to sequence modeling.
+called <i>test-time training (TTT)</i>.
 It scales linearly with the sequence length,
 while achieving performance competitive with transformers.
-The original paper presents TTT as an "RNN with expressive hidden states".
+The original paper presents TTT models as "RNNs with expressive hidden states".
 In this blog post,
-I motivate TTT from the other direction,
-as an "attention with efficient scaling".
+I motivate TTT models from the other direction,
+as "transformers without quadratic attention".
 Another difference from the original paper is that
 in my formulation, the TTT layer does not have any outer-loop parameters,
 and so can be a drop-in replacement for the attention module.
