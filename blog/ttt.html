@@ -25,15 +25,15 @@ MathJax.Hub.Config({
 
 <h1>learning to (learn at test time): transformers without quadratic attention</h1>
 <h3>November 10, 2024</h3>
-<br>
 
+<p>
 The recent paper
 <a href="https://arxiv.org/abs/2407.04620">
 "Learning to (Learn at Test Time): RNNs with Expressive Hidden States"
 </a>
 introduces <i>test-time training (TTT)</i>,
 an exciting new approach to sequence modeling.
-The authors present the TTT model as a <i>recurrent neural network (RNN)</i>
+The authors present the TTT model as a recurrent neural network (RNN)
 capable of achieving transformer-level quality.
 In this blog post,
 I motivate the TTT model from the other direction &mdash;
@@ -44,59 +44,81 @@ as an approximation to the transformer's quadratic attention mechanism.
 Apart from providing fresh intuition for TTT,
 this perspective suggests interesting possibilities
 such as initializing TTT models with pre-trained transformer weights.
+</p>
 
 <h2>approximating attention with test-time training</h2>
 
-Single-query attention has the type signature \( o = a(q, K, V) \), where,
+<p>
+For simplicity, let us first consider attention with a single query vector.
+</p>
+
+<p>
+<i>Single-query attention</i> has the type signature \( o = a(q, K, V) \), where,
 <ul>
 <li>\( q \in \mathbb{R}^{d_k} \) is the <i>query</i> vector,</li>
 <li>\( K = [k_1, \dots, k_T], k_i \in \mathbb{R}^{d_k}, \) is the list of <i>key</i> vectors,</li>
 <li>\( V = [v_1, \dots, v_T], v_i \in \mathbb{R}^{d_v}, \) is the list of <i>value</i> vectors, and,</li>
 <li>\( o \in \mathbb{R}^{d_v} \) is the <i>output</i> vector.</li>
 </ul>
+</p>
 
-
+<p>
 The standard <i>scaled-dot-product-attention</i> (\( a^{\text{SDPA}} \)) is computed as follows:
 <ol>
-<li>\( w = \text{softmax}\left(\left\{\frac{q \cdot k_1}{\sqrt{d_k}}, \dots, \frac{q \cdot k_T}{\sqrt{d_k}}\right\}\right) \)</li>
+<li>\( w = \text{softmax}\left(\left[\frac{q \cdot k_1}{\sqrt{d_k}}, \dots, \frac{q \cdot k_T}{\sqrt{d_k}}\right]\right) \)</li>
 <li>\( o = \sum_{i=1}^t w_i v_i \)</li>
 </ol>
+</p>
 
+<p>
 Below is an intuitive breakdown of the two steps:
 <ol>
 <li>Soft-select a key \( k_i \) most <i>similar</i> to the query \( q \),</li>
 <li>Return the associated value \( v_i \).</li>
 </ol>
+</p>
 
-
-This is reminiscent of applying a <i>nearest-neighbor classifier</i> with
+<p>
+This is reminiscent of applying a <i>nearest-neighbor model</i> with
 train set \( \{(k_1, v_1), \dots, (k_T, v_T)\}, \) and
 test input \( q \).
-<b>So long as we have a classifier on the key-value pairs,
-why not use a neural network?</b>
+<b>What if we instead use a parametric model such as a neural network?</b>
 This would look like below:
 <ol>
-<li>Train a neural network \( f_\theta \) to predict \( v_i \) given input \( k_i \), and,</li>
+<li>Train a neural network \( f_\theta \) to predict \( v_i \) for input \( k_i \), and,</li>
 <li>Return the prediction of the network on \( q \).</li>
 </ol>
+</p>
 
-
-This motivates \( a^{\text{TTT}} \), computed as follows:
+<p>
+This suggests \( a^{\text{TTT}} \) as a substitute for \( a^{\text{SDPA}} \),
+computed as follows:
 <ol>
 <li>\( \theta = \arg \min_\theta \sum_{i=1}^T \Vert f_\theta(k_i) - v_i \Vert^2 \)</li>
 <li>\( o = f_\theta(q) \). </li>
 </ol>
+</p>
 
-Step 1 corresponds to training the network with an\( L_2 \)loss.
-If we have to train on all key-value pairs,
-then \( a^{\text{TTT}} \) is at least linear in the sequence length,
+<p>
+Step 1 above trains the network \( f_\theta \) with an \( L_2 \) loss.
+Note that this training happens within the lifetime of a single attention call.
+The attention call can be part of an <i>outer model</i>, such as a transformer.
+Inferencing the outer model at test-time would still require training \( f_\theta \)
+within the attention call, hence the name "test-time training".
+</p>
+
+
+<h2>how does TTT achieve linear scaling?</h2>
+
+<p>
+So far, we train \( f_\theta \) on all key-value pairs
+for every single-query attention call.
+In this setting, \( a^{\text{TTT}} \) is at least linear in the sequence length,
 no better than \( a^{\text{SDPA}} \).
 To see how TTT can be more efficient,
 we need to consider how single-query attention
 is invoked inside the over-arching self-attention computation.
-
-
-<h2>how does TTT achieve linear scaling?</h2>
+</p>
 
 In <i>self-attention</i>, there is a query vector,
 and an associated output vector,
