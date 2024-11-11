@@ -31,21 +31,19 @@ The recent paper
 <a href="https://arxiv.org/abs/2407.04620">
 "Learning to (Learn at Test Time): RNNs with Expressive Hidden States"
 </a>
-presents <i>test-time training (TTT)</i>,
+introduces <i>test-time training (TTT)</i>,
 an exciting new approach to sequence modeling.
-TTT employs a <i>recurrent neural network (RNN)</i> -style architecture
-which scales linearly with the sequence length.
-However, unlike traditional RNNs,
-TTT models achieve transformer-level quality.
+The authors present the TTT model as a <i>recurrent neural network (RNN)</i>
+capable of achieving transformer-level quality.
 In this blog post,
-I present an alternate formulation of TTT
-as an approximation to the attention mechanism,
-which lies at the heart of the transformer architecture.
+I motivate the TTT model from the other direction &mdash;
+as a transformer with RNN-like linear complexity in the sequence length.
+Towards this end,
+I give an alternate formulation of TTT
+as an approximation to the transformer's quadratic attention mechanism.
 Apart from providing fresh intuition for TTT,
 this perspective suggests interesting possibilities
 such as initializing TTT models with pre-trained transformer weights.
-
-<h2>short intro to TTT</h2>
 
 <h2>approximating attention with test-time training</h2>
 
@@ -135,6 +133,19 @@ For\( t=1, \dots, T\):
 This is linear in the sequence length\( T\).
 
 <h2>consequences and comparison with the original paper</h2>
+
+<h2>differences from the original presentation</h2>
+
+The TTT model has two kinds of parameters:
+<ol>
+<li><i>outer-loop parameters</i>, learnt at train-time, and,</li>
+<li><i>inner-loop parameters</i>, learnt at test-time.</li>
+</ol>
+
+The inner-loop parameters serve as the hidden state of the RNN.
+At test-time, the hidden state is updated on a new token
+by training the inner-loop parameters.
+
 
 <h2>epilogue</h2>
 
