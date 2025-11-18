@@ -9,3 +9,4 @@ Other people who use this template:
 * [Marcel Roed](https://marcel.roed.me)
 * [Michael Bereket](https://mbereket.github.io)
 * [Mark Znidar](https://mark-znidar.github.io/)
+* [Harshvardhan Agarwal](https://harshvardhanagg.github.io)
