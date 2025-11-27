@@ -1,215 +1,286 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
-<title>rishabh ranjan</title>
-<link rel="icon" type="image/x-icon" href="favicon.jpg">
+  <meta charset="UTF-8">
+  <title>Bhavik Agarwal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+<main>
 
-<img id="profile_pic" src="assets/profile_pic.jpg" alt="rishabh ranjan">
+  <!-- HEADER / CONTACT -->
+  <header>
+    <h1>Bhavik Agarwal</h1>
+    <p>California, United States</p>
+    <p>
+      <a href="tel:+16678991927">+1 (667) 899-1927</a> ·
+      <a href="mailto:bhavik2506@gmail.com">bhavik2506@gmail.com</a> ·
+      <a href="https://www.linkedin.com/in/bhavik-agarwal-7a5432178/" target="_blank">LinkedIn</a> ·
+      <a href="https://scholar.google.com/citations?user=SlFuNGkAAAAJ&hl=en" target="_blank">Google Scholar</a> ·
+      <a href="https://github.com/darktravel" target="_blank">GitHub</a>
+    </p>
 
-<h1>rishabh ranjan</h1>
+    <nav>
+      <a href="#research-interests">research interests</a> |
+      <a href="#education">education</a> |
+      <a href="#research-experience">research</a> |
+      <a href="#publications">publications</a> |
+      <a href="#teaching">teaching</a> |
+      <a href="#industry">industry</a> |
+      <a href="#honors">honors</a> |
+      <a href="#skills">skills</a>
+    </nav>
+  </header>
 
-<h3>
-<a href="assets/resume.pdf">resume</a>
-| <a href="https://scholar.google.com/citations?user=NNzQUrcAAAAJ&hl=en">scholar</a>
-| <a href="https://github.com/rishabh-ranjan">github</a>
-| <a href="https://x.com/_rishabhranjan_">twitter</a>
-| <a href="https://www.linkedin.com/in/rishabh-ranjan-2a28042a4/">linkedin</a>
-| <a href="mailto:rishabhranjan0207@gmail.com">email</a>
-| <a href="blog.html">blog</a>
-</h3>
+  <!-- SHORT BLURB -->
+  <section id="about">
+    <p>
+      I work on dependable small-language-model systems: multi-agent orchestration,
+      retrieval-augmented generation (RAG) and knowledge-graph–augmented retrieval,
+      and verifiable structured generation. I enjoy building models and systems that
+      are reliable enough to deploy in regulated, real-world settings.
+    </p>
+  </section>
 
-<p>
-I am a third-year PhD student in Computer Science at Stanford University,
-co-advised by Prof. <a href="https://cs.stanford.edu/people/jure/">Jure Leskovec</a>
-and Prof. <a href=https://guestrin.su.domains">Carlos Guestrin</a>.
-I am grateful to be supported by the Amazon Core AI Fellowship (2025-27),
-and earlier by the School of Engineering Fellowship (2023-24).
-Before this,
-I spent a lovely year learning under
-Prof. <a href="https://www.zacharylipton.com">Zachary Lipton</a>
-as a visiting researcher at Carnegie Mellon University (CMU).
-I did my undergrad in CS at IIT Delhi,
-where I was the President's Gold Medalist for the class of 2022.
-<!-- where I was fortunate to work with Profs. -->
-<!-- <a href="https://www.cse.iitd.ac.in/~mausam/">Mausam</a>, -->
-<!-- <a href="https://www.cse.iitd.ac.in/~parags/">Parag Singla</a>, -->
-<!-- <a href="https://www.cse.iitd.ac.in/~sayan/">Sayan Ranu</a>, -->
-<!-- and <a href="https://subodhvsharma.github.io">Subodh Sharma</a>. -->
-</p>
+  <!-- RESEARCH INTERESTS -->
+  <section id="research-interests">
+    <h2>Research Interests</h2>
+    <ul>
+      <li>Small language models and efficiency</li>
+      <li>Multi-agent orchestration and tool-using LMs</li>
+      <li>Retrieval-augmented generation (RAG) and knowledge-graph–augmented retrieval</li>
+      <li>Verifiable, schema-constrained generation and reliability</li>
+    </ul>
+  </section>
 
-<p>
-I am passionate about deep learning research.
-These days I develop foundation models for relational domains,
-such as SQL databases, spreadsheets, tables and time series,
-to bring modern AI to enterprise data
-(e.g., see <a href="https://x.com/_rishabhranjan_/status/1983686369424896073">this</a>).
-</p>
+  <!-- EDUCATION -->
+  <section id="education">
+    <h2>Education</h2>
 
-<p>
-In my free time,
-I like to swim, watch movies, and
-<a href="https://www.goodreads.com/user/show/164099242-rishabh-ranjan">read</a>.
-</p>
+    <h3>Johns Hopkins University</h3>
+    <p><strong>Masters, Computer Science (Thesis)</strong>, Aug 2023 – May 2025 · GPA: 3.85/4.0 · Baltimore, MD</p>
+    <ul>
+      <li>
+        Thesis: Question answering for genomics/pharmacogenomics using Azure RAG; designed
+        token-aware chunking and provenance tracking and compared vector-RAG, keyword-RAG,
+        and GPT-4o baselines. IRB-approved, supported by Microsoft Research/Azure, archived
+        in the JHU Library.
+      </li>
+      <li>Graduate Research Assistant to Prof. Casey Taylor.</li>
+    </ul>
 
+    <h3>IIIT-Delhi</h3>
+    <p><strong>B.Tech., Computer Science Engineering, Biosciences Engineering</strong>, Aug 2018 – Apr 2022 · GPA: 3.80/4.0 · New Delhi, India</p>
+    <ul>
+      <li>Dean’s List of Academic Excellence. Top 1% in JEE (India) among 1.5M candidates.</li>
+    </ul>
+  </section>
 
-<!-- <h2>news</h2> -->
+  <!-- RESEARCH EXPERIENCE -->
+  <section id="research-experience">
+    <h2>Research Experience</h2>
 
-<!-- <table> -->
+    <h3>MasterControl</h3>
+    <p><strong>Machine Learning Research Scientist</strong> · Fall 2024 – Present · United States</p>
+    <ul>
+      <li>
+        First author, <strong>ThinkJSON</strong> (under review at EACL 2025): multi-reward GRPO for
+        strict JSON with separated &lt;think&gt; and &lt;answer&gt; modes; a 7B+LoRA model achieves
+        82% strict-parse success on noisy JSON-schema benchmarks on a single A100 GPU.
+      </li>
+      <li>
+        First author, <strong>RAGulating Compliance</strong> (International Semantic Web Conference 2025):
+        triplet-first knowledge graph and multi-agent retrieval for evidence-grounded QA;
+        resulted in U.S. Patent App. 19/355,798.
+      </li>
+      <li>
+        Designed and deployed budget-aware orchestration with fallback policies and
+        response auditing for regulated enterprise workloads.
+      </li>
+      <li>
+        Invited talk and poster at the PDA Good Digital Manufacturing Conference, Switzerland (2025).
+      </li>
+    </ul>
 
-<!-- <tr> -->
-<!-- 	<th>Jul 30, 2024</th> -->
-<!-- 	<td><a href="https://relbench.stanford.edu">RelBench</a> (v1) released.</td> -->
-<!-- </tr> -->
+    <h3>Microsoft Research &amp; Johns Hopkins University</h3>
+    <p><strong>Graduate Research Assistant</strong> (Advisor: Prof. Casey Taylor) · Fall 2023 – Spring 2025 · Baltimore, MD</p>
+    <ul>
+      <li>
+        Built an Azure-based RAG pipeline for genomics/pharmacogenomics using token-aware chunking,
+        a provenance store, Azure Cognitive Search, and Azure OpenAI; evaluated vector-RAG,
+        keyword-RAG, and GPT-4o baselines from a patient-centric perspective.
+      </li>
+      <li>This work forms the basis of the master’s thesis; tuition fully funded in the final two semesters.</li>
+    </ul>
 
-<!-- <tr> -->
-<!-- 	<th>May 1, 2024</th> -->
-<!-- 	<td>Our <a href="assets/2024/rdl/paper.pdf">Relational Deep Learning</a> position paper was accepted at ICML 2024.</td> -->
-<!-- </tr> -->
+    <h3>Google DeepMind</h3>
+    <p><strong>Research Mentee</strong> (Advisor: Dr. Esteban Real) · Fall 2023 – Spring 2024 · California, United States</p>
+    <ul>
+      <li>
+        Studied compact vision encoders and attention-budget allocation (self/cross-attention)
+        for small models and applied these ideas to tool-using language models and dense RAG retrievers.
+      </li>
+    </ul>
 
-<!-- <tr> -->
-<!-- 	<th>Apr 11, 2024</th> -->
-<!-- 	<td>My CMU work on <a href="https://arxiv.org/abs/2404.07815">Post-Hoc Reversal</a> is on arXiv.</td> -->
-<!-- </tr> -->
+    <h3>SAP Labs</h3>
+    <p><strong>AI/ML Scientist Intern, Generative AI (SAP Joule)</strong> · Summer 2024 · California, United States</p>
+    <ul>
+      <li>
+        Multi-agent embedding-space API orchestration: domain clustering with leader election
+        and two-stage routing using cosine similarity and a reasoning LLM; internal task-success
+        rate improved from 42% to 78%.
+      </li>
+      <li>
+        First-author U.S. Patent App. 19/022,406 on multi-agent API orchestration; collaborated
+        with NVIDIA and Mistral on function-calling constraints.
+      </li>
+    </ul>
+  </section>
 
-<!-- <tr> -->
-<!-- 	<th>Mar 18, 2024</th> -->
-<!-- 	<td>I aligned with Prof. <a href=https://cs.stanford.edu/people/jure/">Jure Leskovec</a> as my PhD advisor.</td> -->
-<!-- </tr> -->
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <h2>Selected Publications</h2>
+    <ul>
+      <li>
+        <strong>Think Inside the JSON: Reinforcement Strategy for Strict LLM Schema Adherence.</strong>
+        Preprint 2025. [<a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SlFuNGkAAAAJ&citation_for_view=SlFuNGkAAAAJ:2osOgNQ5qMEC" target="_blank">link</a>]
+      </li>
+      <li>
+        <strong>RAGulating Compliance: A Multi-Agent Knowledge Graph for Regulatory QA.</strong>
+        International Semantic Web Conference 2025. [<a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SlFuNGkAAAAJ&citation_for_view=SlFuNGkAAAAJ:Y0pCki6q_DkC" target="_blank">link</a>]
+      </li>
+      <li>
+        <strong>Prompt Engineering to Generate Synthetic Patient Portal Drug-Related Communications.</strong>
+        Journal of Biomedical Informatics, 2024. [<a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SlFuNGkAAAAJ&citation_for_view=SlFuNGkAAAAJ:u-x6o8ySG0sC" target="_blank">link</a>]
+      </li>
+      <li>
+        <strong>Time Series Nowcasting of India’s GDP with Machine Learning.</strong>
+        IEEE conference paper, 2023. [<a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SlFuNGkAAAAJ&citation_for_view=SlFuNGkAAAAJ:u5HHmVD_uO8C" target="_blank">link</a>]
+      </li>
+      <li>
+        <strong>Exploration of Negative Mass as a Harbinger of Dark Energy.</strong>
+        Journal of Applied Physics, 2020. [<a href="https://www.iosrjournals.org/iosr-jap/papers/Vol12-issue5/Series-2/I1205025359.pdf" target="_blank">link</a>]
+      </li>
+    </ul>
 
-<!-- <tr> -->
-<!-- 	<th>Nov 28, 2023</th> -->
-<!-- 	<td>Our <a href="https://arxiv.org/abs/2312.04615">Relational Deep Learning</a> paper was on the front page of <a href="https://news.ycombinator.com/item?id=38447338">Hacker News</a>.</td> -->
-<!-- </tr> -->
+    <h3>Patents (U.S. Applications)</h3>
+    <ul>
+      <li>19/022,406 — <em>Multi-Agent Embedding-Space API Orchestration for Enterprise Assistants</em>. First author; originated at SAP.</li>
+      <li>19/355,798 — <em>Multi-Agent Knowledge Graph Retrieval with Evidence Grounding</em>. First author; originated at MasterControl.</li>
+    </ul>
 
-<!-- <tr> -->
-<!-- 	<th>Nov 27, 2023</th> -->
-<!-- 	<td><a href="https://relbench.stanford.edu">RelBench</a> (Beta) released at Learning on Graphs (LoG) conference.</td> -->
-<!-- </tr> -->
+    <h3>Master’s Thesis</h3>
+    <ul>
+      <li>
+        <strong>Patient-Centric Genomics and Pharmacogenomics Question Answering with Azure RAG</strong>,
+        Johns Hopkins University, 2025.
+        [<a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SlFuNGkAAAAJ&citation_for_view=SlFuNGkAAAAJ:UeHWp8X0CEIC" target="_blank">link</a>]
+      </li>
+    </ul>
+  </section>
 
-<!-- <tr> -->
-<!-- 	<th>Sep 26, 2023</th> -->
-<!-- 	<td>I started my PhD at Stanford.</td> -->
-<!-- </tr> -->
+  <!-- TEACHING & MENTORSHIP -->
+  <section id="teaching">
+    <h2>Teaching</h2>
 
-<!-- <tr> -->
-<!-- 	<th>Jul 15, 2023</th> -->
-<!-- 	<td>This webpage is live.</td> -->
-<!-- </tr> -->
+    <h3>Johns Hopkins University</h3>
+    <p><strong>Lead Teaching Assistant</strong> · Spring 2024 – Spring 2025 · Baltimore, MD</p>
+    <ul>
+      <li>Machine Learning (Spring 2025)</li>
+      <li>Deep Learning with Unstructured Data (Spring 2024)</li>
+      <li>Big Data Machine Learning (Spring 2024)</li>
+    </ul>
 
-<!-- </table> -->
+    <h3>IIIT-Delhi</h3>
+    <p><strong>Teaching Assistant</strong> · Spring 2021 – Fall 2021 · New Delhi, India</p>
+    <ul>
+      <li>Statistical Machine Learning (Fall 2021)</li>
+      <li>Biophysics (Spring 2021)</li>
+    </ul>
 
+    <h3>Mentorship</h3>
+    <ul>
+      <li>
+        Graduate Mentor, M.S. CS Cohort, Johns Hopkins University (Fall 2024 – Spring 2025).
+        Mentored 8 incoming M.S. students on research scoping, reproducibility, and internship preparation.
+      </li>
+      <li>
+        Undergraduate Mentor, CS Mentoring Program, IIIT-Delhi (Fall 2021 – Spring 2022).
+        Advised 5 mentees on projects and research skills; held weekly office hours and interview-prep sessions.
+      </li>
+    </ul>
+  </section>
 
-<h2>pre-prints</h2>
+  <!-- OPEN SOURCE -->
+  <section id="open-source">
+    <h2>Open Source</h2>
+    <ul>
+      <li>
+        Released 13+ models with 10M+ downloads on Hugging Face:
+        <a href="https://huggingface.co/MasterControlAIML/models" target="_blank">MasterControlAIML</a>,
+        <a href="https://huggingface.co/bhaviktheslider" target="_blank">@bhaviktheslider</a>.
+      </li>
+    </ul>
+  </section>
 
-<ul>
+  <!-- INDUSTRY EXPERIENCE -->
+  <section id="industry">
+    <h2>Industry Experience</h2>
 
-<li>
-<b>Relational Transformer: Toward Zero-Shot Foundation Models for Relational Data</b><br>
-<u>Rishabh Ranjan</u>, Valter Hudovernik, Mark Znidar, Charilaos Kanatsoulis, Roshan Upendra, Mahmoud Mohammadi, Joe Meyer, Tom Palczewski, Carlos Guestrin, Jure Leskovec<br>
-<i>Under review, 2025</i><br>
-<a href="assets/2026_rt.pdf">paper</a>
-| <a href="https://arxiv.org/abs/2510.06377">arxiv</a>
-| <a href="https://github.com/snap-stanford/relational-transformer">code</a>
-| <a href="assets/2026_rt.txt">cite</a>
-</li>
+    <h3>BlueStacks / now.gg</h3>
+    <p><strong>Senior AI/ML Engineer</strong> (Advisor: Dr. Rosen Sharma) · Jul 2022 – Jul 2023 · Gurgaon, India</p>
+    <ul>
+      <li>
+        Led a team of 10 to deploy LSTM and N-BEATS models for global traffic forecasting,
+        improving capacity planning and infrastructure utilization (multi-million USD annual savings)
+        while maintaining 99% availability.
+      </li>
+    </ul>
 
-</ul>
+    <h3>Western Digital (SanDisk)</h3>
+    <p><strong>Machine Learning Firmware Engineering Intern</strong> · May 2021 – Jun 2021 · Remote</p>
+    <ul>
+      <li>
+        Implemented telemetry-driven reliability checks and ML-assisted firmware validation;
+        contributed scripts and analyses to accelerate testing.
+      </li>
+    </ul>
+  </section>
 
+  <!-- HONORS -->
+  <section id="honors">
+    <h2>Honors &amp; Awards</h2>
+    <ul>
+      <li><strong>ACM Tapia Scholar</strong>, Richard Tapia Celebration of Diversity in Computing, Fall 2025.</li>
+      <li>Google DeepMind CS Research Mentorship Program (two semesters), Fall 2023 &amp; Spring 2024.</li>
+      <li>Dean’s List of Academic Excellence, IIIT-Delhi, Spring 2022.</li>
+      <li>Only master’s student invited to speak about the program experience on the Johns Hopkins YouTube channel (Spring 2025).</li>
+      <li>Inter-state table tennis: 2nd at national level; Best all-round student in high school.</li>
+    </ul>
+  </section>
 
-<h2>publications</h2>
-(* denotes equal contribution)
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <ul>
+      <li><strong>Languages:</strong> Python, C++, Java, C</li>
+      <li><strong>ML/LLM:</strong> PyTorch, Transformers, LoRA/QLoRA, GRPO/RLHF, RAG, knowledge graphs, vector databases</li>
+      <li><strong>Data/IR:</strong> Azure Cognitive Search, Elasticsearch/Lucene, FAISS, Milvus</li>
+      <li><strong>Systems:</strong> CUDA, NVIDIA A100/L4, Docker, Linux</li>
+      <li><strong>Cloud:</strong> Azure (OpenAI, Storage, Functions), GCP, AWS</li>
+    </ul>
+  </section>
 
-<ul>
+  <footer>
+    <p>
+      Built using a fork of
+      <a href="https://github.com/rishabh-ranjan/rishabh-ranjan.github.io" target="_blank">
+        rishabh-ranjan.github.io
+      </a>.
+    </p>
+  </footer>
 
-<li>
-<b>RelBench: A Benchmark for Deep Learning on Relational Databases</b><br>
-<u>Rishabh Ranjan*</u>, Joshua Robinson*, Weihua Hu*, Kexin Huang*, Jiaqi Han, Alejandro Dobles, Matthias Fey, Jan E. Lenssen, Yiwen Yuan, Zecheng Zhang, Xinwei He, Jure Leskovec<br>
-<i>Advances in Neural Information Processing Systems (NeurIPS), 2024</i><br>
-<a href="assets/2024_relbench.pdf">paper</a>
-| <a href="https://arxiv.org/abs/2407.20060">arxiv</a>
-| <a href="https://github.com/snap-stanford/relbench">code</a>
-| <a href="https://relbench.stanford.edu">website</a>
-| <a href="assets/2024_relbench.txt">cite</a>
-</li>
-
-<li>
-<b>Post-Hoc Reversal: Are We Selecting Models Prematurely?</b><br>
-<u>Rishabh Ranjan</u>, Saurabh Garg, Mrigank Raman, Carlos Guestrin, Zachary Lipton<br>
-<i>Advances in Neural Information Processing Systems (NeurIPS), 2024</i><br>
-<a href="assets/2024_phr.pdf">paper</a>
-| <a href="https://arxiv.org/abs/2404.07815">arxiv</a>
-| <a href="https://github.com/rishabh-ranjan/post-hoc-reversal">code</a>
-| <a href="assets/2024_phr.txt">cite</a>
-</li>
-
-<li>
-<b>Position: Relational Deep Learning - Graph Representation Learning on Relational Databases</b><br>
-Matthias Fey*, Weihua Hu*, Kexin Huang*, Jan Eric Lenssen*, <u>Rishabh Ranjan*</u>, Joshua Robinson*, Rex Ying, Jiaxuan You, Jure Leskovec<br>
-<i>International Conference on Machine Learning (ICML), 2024</i><br>
-<a href="assets/2024_rdl.pdf">paper</a>
-| <a href="https://arxiv.org/abs/2312.04615">arxiv</a>
-| <a href="https://github.com/snap-stanford/relbench">code</a>
-| <a href="https://relbench.stanford.edu">website</a>
-| <a href="assets/2024_rdl.txt">cite</a>
-</li>
-
-<li>
-<b>A Solver-Free Framework for Scalable Learning in Neural ILP Architectures</b><br>
-Yatin Nandwani*, <u>Rishabh Ranjan*</u>, Mausam, Parag Singla<br>
-<i>Advances in Neural Information Processing Systems (NeurIPS), 2022</i><br>
-<a href="assets/2022_ilploss.pdf">paper</a>
-| <a href="https://arxiv.org/abs/2210.09082">arxiv</a>
-| <a href="https://openreview.net/forum?id=EqZuN4V_FLF">reviews</a>
-| <a href="https://neurips.cc/media/PosterPDFs/NeurIPS%202022/53251.png?t=1669859105.1475148">poster</a>
-| <a href="https://neurips.cc/virtual/2022/poster/53251">slides</a>
-| <a href="https://github.com/dair-iitd/ilploss">code</a>
-| <a href="assets/2022_ilploss.txt">cite</a>
-</li>
-
-<li>
-<b>GREED: A Neural Framework for Learning Graph Distance Functions</b><br>
-<u>Rishabh Ranjan</u>, Siddharth Grover, Sourav Medya, Venkatesan Chakaravarthy, Yogish Sabharwal, Sayan Ranu<br>
-<i>Advances in Neural Information Processing Systems (NeurIPS), 2022</i><br>
-<a href="assets/2022_greed.pdf">paper</a>
-| <a href="https://arxiv.org/abs/2112.13143">arxiv</a>
-| <a href="https://openreview.net/forum?id=3LBxVcnsEkV">reviews</a>
-| <a href="https://neurips.cc/media/PosterPDFs/NeurIPS%202022/54507.png?t=1669859442.0786178">poster</a>
-| <a href="https://neurips.cc/virtual/2022/poster/54507">slides</a>
-| <a href="https://github.com/idea-iitd/greed">code</a>
-| <a href="assets/2022_greed.txt">cite</a>
-</li>
-
-<li>
-<b>Exploiting Epochs and Symmetries in Analysing MPI Programs</b><br>
-<u>Rishabh Ranjan</u>, Ishita Agrawal, Subodh Sharma<br>
-<i>IEEE/ACM International Conference on Automated Software Engineering (ASE), 2022</i><br>
-<a href="assets/2022_simian.pdf">paper</a>
-| <a href="https://github.com/rishabh-ranjan/simian">code</a>
-| <a href="https://sat-smt-ws.gitlab.io/2020/programme.html">talk</a>
-| <a href="assets/2022_simian.txt">cite</a>
-</li>
-
-</ul>
-
-
-<footer>
-Made with &#10084;&#65039; in plain HTML and CSS
-(<a href="https://github.com/rishabh-ranjan/rishabh-ranjan.github.io">source</a>).
-<footer>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-
+</main>
 </body>
-
 </html>
