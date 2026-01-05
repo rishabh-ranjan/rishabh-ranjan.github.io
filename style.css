@@ -62,6 +62,11 @@ a:visited {
 	color: green;
 }
 
+a.award, a.award:visited, a.award:hover, a.award:active, a.award:focus {
+	color: red;
+	font-weight: bold;
+}
+
 u {
 	text-decoration: none;
 	border-bottom: 1px solid black;
