@@ -1,0 +1,7 @@
+@misc{kothapalli2026plurel,
+	title = {{PluRel:} Synthetic Data unlocks Scaling Laws for Relational Foundation Models},
+	author = {Kothapalli, Vignesh and Ranjan, Rishabh and Hudovernik, Valter and Dwivedi, Vijay Prakash and Hoffart, Johannes and Guestrin, Carlos and Leskovec, Jure},
+	year = {2026},
+	note = {Preprint.},
+	url = {https://rishabh-ranjan.github.io/assets/2026_plurel.pdf}
+}
