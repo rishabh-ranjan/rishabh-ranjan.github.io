@@ -1,0 +1,6 @@
+@article{priorlabs2026relarena,
+	title={Advancing Open and Reproducible Relational Learning: {RelArena}-$\alpha$, {TabPFN-Rel} and {RPI}},
+	author={Hayler, Adrian and Fl{\"o}ge, Klemens and Arazi, Alan and Ranjan, Rishabh and Leskovec, Jure and Purucker, Lennart and Hutter, Frank and Hollmann, Noah and {the Prior Labs Team}},
+	journal={arXiv preprint arXiv:2608.16319},
+	year={2026}
+}
