@@ -1,0 +1,6 @@
+@inproceedings{ranjan2026rtj,
+    title={{RT-J:} Large-Scale Pretraining of Relational Transformers for Context-Efficient Predictions},
+    author={Rishabh Ranjan and Vignesh Kothapalli and Harshvardhan Agarwal and Charilaos Kanatsoulis and Roshan Upendra and Tom Palczewski and Carlos Guestrin and Jure Leskovec},
+    booktitle={The Fortieth Annual Conference on Neural Information Processing Systems},
+    year={2026}
+}
