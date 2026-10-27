@@ -1,0 +1,6 @@
+@article{patel2026tokengate,
+    title={{TokenGate}: Adapting {LLMs} for Fast and Memory-Efficient Prefill with Learned Token Pruning},
+    author={Liana Patel and Rishabh Ranjan and Ion Stoica and Matei Zaharia and Carlos Guestrin},
+    journal={arXiv preprint arXiv:2610.26754},
+    year={2026}
+}
